@@ -15,7 +15,8 @@
         box-shadow: 0 16px 48px #E3E7EB;
     }
 </style>
-
+<a href="{% url 'blog_login' %}" class="btn btn-primary">Iniciar Sesión </a>
+<a href="{% url 'blogger_signup' %}" class="btn btn-primary">Crear usuario </a>
 <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
@@ -37,10 +38,10 @@
             {% for post in post_list %}
             <div class="card mb-4">
                 <div class="card-body">
-                    <h2 class="card-title">{{ post.title }}</h2>
-                    <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-                    <p class="card-text">{{post.content|slice:":200" }}</p>
-                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                    <h2 class="card-title">{{ post.titulo }}</h2>
+                    <p class="card-text text-muted h6">{{ post.autor }} | {{ post.fecha_creacion}} </p>
+                    <p class="card-text">{{post.cuerpo|slice:":200" }}</p>
+                    <a href="{% url 'home' %}" class="btn btn-primary">Leer más &rarr;</a>
                 </div>
             </div>
             {% endfor %}

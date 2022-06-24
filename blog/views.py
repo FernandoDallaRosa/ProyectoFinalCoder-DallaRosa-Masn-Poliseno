@@ -1,6 +1,16 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Post
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from blog.models import Post
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
     my_dict = {"insert_me": "I am from views.py"}
@@ -8,10 +18,56 @@ def index(request):
 
 
 class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    model = Post
     template_name = 'index.html'
 
 class PostDetail(generic.DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'blog_detail.html'
+
+
+
+class BlogCreate(LoginRequiredMixin, CreateView):
+
+    model = Post
+    template_name = 'blogmodel_form.html'
+    success_url = reverse_lazy("home")
+    fields = ["titulo", "cuerpo"]
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
+
+class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+    model = Post
+    success_url = reverse_lazy("blog_list")
+    fields = ["titulo",  "cuerpo"]
+
+    def test_func(self):
+        exist = Post.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
+        return True if exist else False
+        
+
+
+class BlogDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+
+    model = Post
+    success_url = reverse_lazy("blog_list")
+
+    def test_func(self):
+        exist = Post.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
+        return True if exist else False
+
+
+class BlogLogin(LoginView):
+    template_name = 'blog_login.html'
+    next_page = reverse_lazy("blog_create")
+
+
+class BlogLogout(LogoutView):
+    template_name = 'blog_logout.html'
+
+
 
