@@ -17,11 +17,11 @@ def index(request):
     return render(request,'index.html',context=my_dict)
 
 
-class PostList(generic.ListView):
+class PostList(ListView):
     model = Post
     template_name = 'index.html'
 
-class PostDetail(generic.DetailView):
+class PostDetail(DetailView):
     model = Post
     template_name = 'blog_detail.html'
 
@@ -42,7 +42,8 @@ class BlogCreate(LoginRequiredMixin, CreateView):
 class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     model = Post
-    success_url = reverse_lazy("blog_list")
+    template_name = 'blogmodel_form.html'
+    success_url = reverse_lazy("home")
     fields = ["titulo",  "cuerpo"]
 
     def test_func(self):
@@ -54,7 +55,8 @@ class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class BlogDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 
     model = Post
-    success_url = reverse_lazy("blog_list")
+    template_name = 'blogmodel_confirm_delete.html'
+    success_url = reverse_lazy("home")
 
     def test_func(self):
         exist = Post.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
@@ -63,7 +65,7 @@ class BlogDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
 
 class BlogLogin(LoginView):
     template_name = 'blog_login.html'
-    next_page = reverse_lazy("blog_create")
+    next_page = reverse_lazy("home")
 
 
 class BlogLogout(LogoutView):

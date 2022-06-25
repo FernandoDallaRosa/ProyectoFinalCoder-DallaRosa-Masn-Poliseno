@@ -1,11 +1,24 @@
-<a href="{% url 'blog_list' %}">Volver a Lista Blogs</a>
-<a href="{% url 'blogger_edit' user.id %}">Editar Perfil</a>
+{% extends "base.html" %}
+{% block content %}
 
+
+<a href="{% url 'home' %}"class="btn btn-primary">Volver a Home</a>
+<a href="{% url 'blogger_edit' user.id %}"class="btn btn-primary">Editar Perfil</a>
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
 <ul>
     <li>Nombre: {{object.first_name}}<li>
     <li>Apellido: {{object.last_name}}<li>
     <li>Correo electronico: {{object.email}} </li>
     <li>Nombre de Usuario: {{object.username}}</li>
 </ul>
-
 <img height="128" src="{{ object.avatar_set.first.image.url }}" />
+</div>
+</div>
+
+
+
+
+{%endblock%}
