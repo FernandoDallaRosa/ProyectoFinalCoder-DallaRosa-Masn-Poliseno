@@ -73,4 +73,5 @@ class BlogLogout(LogoutView):
 
 class About(CreateView):
     template_name = 'about.html'
+    
 
