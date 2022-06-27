@@ -5,6 +5,10 @@ Creadores:
 - Federico Poliseno
 - Fernando Masnú
 
+(Antes de usar realiza migraciones con el comando en git bash "python manage.py makemigrations" y luego "python manage.py migrate)
+
+Para comenzar a utilizar la aplicación se debe realizar el comando "python manage.py runserver" en la termina git bash y luego incresar en el navegador a "localhost:8000"
+
 TODO SERIES es un blog en donde el usuario puede recomendar diferentes series que haya visto.
 
 se puede usar el boton "Sobre nosotros" dentro del sitio para conocer sobre la app y los creadores.
