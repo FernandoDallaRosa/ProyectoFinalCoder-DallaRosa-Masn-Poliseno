@@ -3,7 +3,7 @@ from django.views import generic
 from .models import Post
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -71,7 +71,9 @@ class BlogLogin(LoginView):
 class BlogLogout(LogoutView):
     template_name = 'blog_logout.html'
 
-class About(CreateView):
+class About(TemplateView):
     template_name = 'about.html'
+
+    
     
 
