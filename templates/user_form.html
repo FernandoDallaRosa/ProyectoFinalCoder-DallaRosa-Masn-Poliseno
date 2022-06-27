@@ -8,7 +8,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Guardar">
-    <h2>Si desea cambiar su imagen, contáctese con un administrador.</h2>
+    <h5>Si desea cambiar su imagen, contáctese con un administrador.</h5>
     <br>
     <img height="128" src="{{ object.avatar_set.first.image.url }}" />
 <br>
