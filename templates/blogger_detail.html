@@ -10,10 +10,10 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
 <ul>
-    <li>Nombre: {{object.first_name}}<li>
-    <li>Apellido: {{object.last_name}}<li>
-    <li>Correo electronico: {{object.email}} </li>
-    <li>Nombre de Usuario: {{object.username}}</li>
+    <li>Nombre: {{object.first_name}}
+    <li>Apellido: {{object.last_name}}
+    <li>Correo electronico: {{object.email}} 
+    <li>Nombre de Usuario: {{object.username}}
 </ul>
 {% if object.avatar_set.first.image %}
 <br><br><img height="128" src="{{ object.avatar_set.first.image.url }}" />
