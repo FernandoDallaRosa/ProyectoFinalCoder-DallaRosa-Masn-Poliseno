@@ -1,5 +1,7 @@
 Aplicación "TODO SERIES"
 
+explicación en video: https://www.youtube.com/watch?v=v_5c8ZVGCvg
+
 Creadores: 
 - Fernando Dalla Rosa
 - Federico Poliseno
