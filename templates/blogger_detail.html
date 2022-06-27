@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
 
@@ -14,9 +15,18 @@
     <li>Correo electronico: {{object.email}} </li>
     <li>Nombre de Usuario: {{object.username}}</li>
 </ul>
-<img height="128" src="{{ object.avatar_set.first.image.url }}" />
+{% if object.avatar_set.first.image %}
+<br><br><img height="128" src="{{ object.avatar_set.first.image.url }}" />
+{% else %}
+<br>Contacta a un administrador para que agregue una imagen a tu perfil.
+{% endif %}
+<br><br>
+<a href="{% url 'blogger_edit' user.id %}">Editar Perfil</a>
+</div><br><br>
 </div>
 </div>
+{% endblock %}
+
 
 
 

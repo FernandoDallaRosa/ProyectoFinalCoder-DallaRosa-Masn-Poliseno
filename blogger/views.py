@@ -6,6 +6,8 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
+from blogger.models import Avatar
+
 
 class SignUpView(SuccessMessageMixin, CreateView):
   template_name = 'blogger_crear_cuenta_form.html'
@@ -23,7 +25,7 @@ class BloggerUpdate(LoginRequiredMixin, UpdateView):
 
     model = User
     template_name = "user_form.html"
-    fields = ["username", "email", "first_name", "last_name"]
+    fields = ["username", "email", "first_name", "last_name",]
 
     def get_success_url(self):
       return reverse_lazy("blogger_profile", kwargs={"pk": self.request.user.id})

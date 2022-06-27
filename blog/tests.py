@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
-from blog.models import BlogModel, Post
-from blog.views import BlogList
+from blog.models import Post
+from blog.views import PostList
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -11,7 +11,7 @@ class TestBlog(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username='user', email='email@example.com', password='pass')
-        self.blog = Post(titulo="Titulo", sub_titulo="Sub titulo", cuerpo="Cuerpo", autor=self.user)
+        self.blog = Post(titulo="Titulo", cuerpo="Cuerpo", autor=self.user)
         self.blog.save()
 
         self.user_1 = User.objects.create_user(username='user_1', email='email_1@example.com', password='pass')
@@ -19,7 +19,7 @@ class TestBlog(TestCase):
     def test_list_all_blogs(self):
         response = self.client.get(reverse('blog_list'))
         #Cuando se usa class based views se tiene que comprar por el nombre de instancia.
-        self.assertEqual(response.resolver_match.func.__name__, BlogList.as_view().__name__)
+        self.assertEqual(response.resolver_match.func.__name__, PostList.as_view().__name__)
 
 
     def test_borrar_blog__usuario_no_logueado(self):
